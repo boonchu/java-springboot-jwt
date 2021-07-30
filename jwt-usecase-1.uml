@@ -1,0 +1,19 @@
+@startuml
+actor Client
+participant Server
+Client -> Server: request login
+|||
+ref over Server, Client : "client login with basic auth"
+|||
+Server --> Server : Generate JWT
+Server --> Client : response with JWT
+|||
+ref over Client
+  JWT Auth 
+end ref
+||| 
+Client -> Server : request with JWT
+Server --> Server : Validate JWT 
+|||
+Server --> Client : Response with 200
+@enduml
